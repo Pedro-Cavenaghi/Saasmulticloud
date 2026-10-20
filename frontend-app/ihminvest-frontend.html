@@ -174,21 +174,6 @@
       gap: 12px
     }
 
-    .form-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 6px
-    }
-
-    .range-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 8px;
-      font-size: 11px;
-      color: var(--muted)
-    }
-
     input[type=range] {
       height: 5px;
       padding: 0;
@@ -238,39 +223,6 @@
     .primary:hover {
       background: #105b94;
       transform: translateY(-1px)
-    }
-
-    .secondary {
-      border: 1px solid rgba(255, 255, 255, .9);
-      border-radius: 7px;
-      background: rgba(255, 255, 255, .68);
-      padding: 10px 13px;
-      color: var(--blue);
-      font-weight: 700;
-      font-size: 11px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px)
-    }
-
-    .form-actions .primary,
-    .form-actions .secondary {
-      padding: 10px 12px;
-      margin: 0;
-      font-size: 12px
-    }
-
-    .disclaimer {
-      display: flex;
-      gap: 9px;
-      color: var(--muted);
-      font-size: 10px;
-      line-height: 1.55;
-      margin: 10px 1px 0
-    }
-
-    .disclaimer svg {
-      flex: none;
-      margin-top: 1px
     }
 
     .dashboard {
@@ -459,55 +411,6 @@
         grid-template-columns: repeat(3, minmax(0, 1fr))
       }
 
-      .form-actions {
-        grid-column: span 3;
-        flex-direction: row
-      }
-
-      .form-actions button {
-        flex: 1
-      }
-
-      .module-grid {
-        grid-template-columns: 1fr
-      }
-
-      .module-card {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        column-gap: 14px;
-        align-items: center
-      }
-
-      .module-head {
-        grid-column: 1 / -1;
-        margin-bottom: 9px
-      }
-
-      .module-label,
-      .module-value,
-      .module-detail {
-        grid-column: 1
-      }
-
-      .module-value {
-        grid-row: 3
-      }
-
-      .module-detail {
-        grid-row: 4;
-        margin-top: 3px;
-        min-height: 0
-      }
-
-      .module-latency {
-        grid-column: 2;
-        grid-row: 3 / span 2;
-        align-self: center;
-        margin-top: 0;
-        padding: 0;
-        border: 0
-      }
     }
 
     @media(max-width:600px) {
@@ -522,14 +425,6 @@
       #investmentForm {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 10px
-      }
-
-      .form-actions {
-        grid-column: span 2
-      }
-
-      .module-grid {
-        grid-template-columns: 1fr
       }
 
       .chart-head {
@@ -575,9 +470,7 @@
             <label for="months">Prazo <span id="monthsLabel">5 anos</span></label>
             <input id="months" name="months" type="range" min="1" max="360" value="60">
           </div>
-          <div class="form-actions">
-            <button class="primary" type="submit">Calcular</button>
-          </div>
+          <button class="primary" type="submit">Calcular projeção</button>
         </form>
       </aside>
 

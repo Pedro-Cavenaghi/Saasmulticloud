@@ -27,6 +27,8 @@ Todas as respostas devem ser JSON com valores numéricos:
 | Azure Functions | `balance`, `usdRate`, `eurRate` | `usd`, `eur`, `usdRate`, `eurRate` |
 | Google Cloud Functions | `balance`, `inflation` (decimal), `months` | `real` |
 
+O campo de IPCA não é pedido ao usuário: o frontend usa uma taxa estimada fixa de 4,5% a.a., definida em `ESTIMATED_INFLATION_RATE`, e a envia ao Google Cloud Functions.
+
 As funções precisam aceitar `POST` com `Content-Type: application/json` e permitir por CORS a origem usada pelo frontend. Atualmente, as três pastas de funções estão vazias e os endpoints não estão configurados.
 
 As projeções são estimativas e não constituem recomendação financeira.
