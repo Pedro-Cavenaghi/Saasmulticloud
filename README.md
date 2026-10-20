@@ -1,20 +1,32 @@
 # IHMInvest
 
-Protótipo de uma plataforma de inteligência para investimentos. A interface permite configurar um cenário financeiro e visualizar uma projeção de patrimônio, com módulos demonstrativos de processamento em nuvem.
+Aplicação web de página única para projetar investimentos e consolidar resultados de AWS Lambda, Azure Functions e Google Cloud Functions.
 
 ## Estrutura
 
-- `frontend-app/ihminvest-frontend.html` — protótipo web autocontido, com formulário de simulação, painel de resultados e gráfico.
-- `aws-lambda/` — espaço reservado para a integração com AWS Lambda.
-- `azure-functions/` — espaço reservado para a integração com Azure Functions.
-- `google-functions/` — espaço reservado para a integração com Google Cloud Functions.
-- `Atividade 04 - Ecossistema SaaS Multicloud Integrado.pdf` — enunciado e material da atividade.
-- `IHMInvest Fluxo.docx` — documento de fluxo do IHMInvest.
+- `frontend-app/ihminvest-frontend.html` — interface, gráfico, chamadas HTTP e fallback local.
+- `aws-lambda/` — implementação AWS (ainda não configurada).
+- `azure-functions/` — implementação Azure (ainda não configurada).
+- `google-functions/` — implementação Google Cloud (ainda não configurada).
+- `Atividade 04 - Ecossistema SaaS Multicloud Integrado.pdf` — enunciado da atividade.
+- `IHMInvest Fluxo.docx` — fluxo da aplicação.
 
-As pastas de funções em nuvem ainda não contêm implementações. Os módulos de nuvem apresentados na interface são demonstrativos e não representam chamadas a serviços reais.
+## Executar
 
-## Como visualizar
+Abra o HTML no navegador para usar os cálculos locais. Para chamadas às APIs, sirva o frontend por HTTP (por exemplo, com Live Server no VS Code) e configure os endpoints no objeto `API_ENDPOINTS`, no fim de `frontend-app/ihminvest-frontend.html`.
 
-Abra `frontend-app/ihminvest-frontend.html` diretamente em um navegador. O protótipo não requer instalação de dependências ou servidor.
+O frontend envia requisições `POST` JSON em paralelo, com timeout de 8 segundos. Cada módulo mostra o provedor, o estado da chamada e a latência real. Se a URL estiver vazia ou a chamada falhar, somente aquele módulo usa o cálculo local; falhas de serviço aparecem como “Serviço temporariamente indisponível”.
 
-> As projeções são ilustrativas e não constituem recomendação financeira.
+## Contratos HTTP esperados
+
+Todas as respostas devem ser JSON com valores numéricos:
+
+| Provedor | Entrada | Resposta |
+|---|---|---|
+| AWS Lambda | `initial`, `monthly`, `annualRate` (decimal), `months` | `balance`, `invested`, `profit` |
+| Azure Functions | `balance`, `usdRate`, `eurRate` | `usd`, `eur`, `usdRate`, `eurRate` |
+| Google Cloud Functions | `balance`, `inflation` (decimal), `months` | `real` |
+
+As funções precisam aceitar `POST` com `Content-Type: application/json` e permitir por CORS a origem usada pelo frontend. Atualmente, as três pastas de funções estão vazias e os endpoints não estão configurados.
+
+As projeções são estimativas e não constituem recomendação financeira.
