@@ -4,24 +4,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f3f5ff">
-  <title>IHMInvest — Inteligência para seus investimentos</title>
+  <meta name="theme-color" content="#f4f8fc">
+  <title>IHMInvest | Projeção financeira</title>
   <style>
     :root {
-      --ink: #20263d;
-      --muted: #737b95;
-      --line: rgba(255, 255, 255, .78);
-      --glass: rgba(255, 255, 255, .48);
-      --glass-strong: rgba(255, 255, 255, .68);
-      --violet: #7772ed;
-      --blue: #5c8df4;
-      --mint: #4bbda6;
-      --rose: #df86b5;
-      --shadow: 0 18px 60px rgba(76, 82, 137, .10), inset 0 1px 0 rgba(255, 255, 255, .9);
+      --ink: #142b42;
+      --muted: #62798f;
+      --line: #d8e5ef;
+      --glass: rgba(255, 255, 255, .78);
+      --blue: #1769aa;
+      --cyan: #0789a8;
+      --shadow: 0 10px 30px rgba(31, 74, 111, .08);
     }
 
     * {
-      box-sizing: border-box
+      box-sizing: border-box;
     }
 
     html {
@@ -33,33 +30,8 @@
       min-height: 100vh;
       color: var(--ink);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f5f6ff;
+      background: #edf4f9;
       overflow-x: hidden
-    }
-
-    body:before,
-    body:after {
-      content: "";
-      position: fixed;
-      inset: -20%;
-      z-index: -2;
-      pointer-events: none;
-      filter: blur(65px);
-      opacity: .76
-    }
-
-    body:before {
-      background:
-        radial-gradient(ellipse at 15% 18%, rgba(170, 197, 255, .58), transparent 28%),
-        radial-gradient(ellipse at 79% 18%, rgba(225, 187, 255, .48), transparent 28%),
-        radial-gradient(ellipse at 75% 78%, rgba(173, 239, 218, .52), transparent 30%),
-        radial-gradient(ellipse at 20% 82%, rgba(255, 208, 228, .44), transparent 28%)
-    }
-
-    body:after {
-      z-index: -1;
-      opacity: .38;
-      background: radial-gradient(ellipse at 50% 45%, rgba(255, 255, 255, .95), transparent 48%)
     }
 
     button,
@@ -73,7 +45,7 @@
     }
 
     .shell {
-      width: min(1240px, calc(100% - 44px));
+      width: calc(100% - 48px);
       margin: 0 auto
     }
 
@@ -81,7 +53,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 25px 0 22px;
+      padding: 20px 0 16px;
       gap: 18px
     }
 
@@ -94,148 +66,25 @@
       font-size: 21px
     }
 
-    .logo {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 15px;
-      color: white;
-      background: linear-gradient(140deg, #8c88f6, #7db7f5 55%, #80d9c3);
-      box-shadow: 0 8px 22px #9b9df055
-    }
-
-    .logo svg {
-      width: 24px;
-      height: 24px
-    }
-
-    .brand small {
-      display: block;
-      color: var(--muted);
-      font-size: 10px;
-      letter-spacing: 1.7px;
-      font-weight: 700;
-      margin-top: 2px
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      border: 1px solid rgba(255, 255, 255, .85);
-      background: rgba(255, 255, 255, .44);
-      padding: 9px 13px;
-      border-radius: 999px;
-      color: #626a83;
-      font-size: 12px;
-      font-weight: 650;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px)
-    }
-
-    .dot {
-      width: 7px;
-      height: 7px;
-      background: #e7ad5d;
-      border-radius: 50%;
-      box-shadow: 0 0 0 4px #e7ad5d20
-    }
-
-    .hero {
-      padding: 35px 0 28px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 24px
-    }
-
-    .eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #7773d7;
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 14px
-    }
-
-    .spark {
-      font-size: 16px
-    }
-
-    h1 {
-      font-size: clamp(32px, 4vw, 50px);
-      line-height: 1.08;
-      letter-spacing: -2.2px;
-      margin: 0;
-      max-width: 690px;
-      font-weight: 760
-    }
-
-    h1 span {
-      background: linear-gradient(100deg, #7772e8, #6e9ce8 50%, #52bca6);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent
-    }
-
-    .hero p {
-      max-width: 600px;
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 14px;
-      margin: 17px 0 0
-    }
-
-    .hero-note {
-      min-width: 195px;
-      max-width: 230px;
-      padding: 17px 18px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      background: var(--glass);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.55
-    }
-
-    .hero-note strong {
-      display: block;
-      color: var(--ink);
-      font-size: 13px;
-      margin-bottom: 5px
-    }
-
     .glass {
       background: var(--glass);
       border: 1px solid var(--line);
+      border-color: rgba(255, 255, 255, .88);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(24px) saturate(135%);
-      -webkit-backdrop-filter: blur(24px) saturate(135%);
-      border-radius: 25px
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 10px
     }
 
     .layout {
-      display: grid;
-      grid-template-columns: 350px minmax(0, 1fr);
-      gap: 20px;
-      align-items: start
+      display: flex;
+      flex-direction: column;
+      gap: 16px
     }
 
     .panel {
-      padding: 24px
+      width: 100%;
+      padding: 16px
     }
 
     .section-heading {
@@ -243,36 +92,18 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 14px;
-      margin-bottom: 22px
+      margin-bottom: 14px
     }
 
     .section-heading h2 {
       font-size: 17px;
       letter-spacing: -.4px;
-      margin: 0 0 6px
-    }
-
-    .section-heading p {
-      font-size: 12px;
-      line-height: 1.55;
-      color: var(--muted);
       margin: 0
     }
 
-    .step {
-      display: grid;
-      place-items: center;
-      min-width: 30px;
-      height: 30px;
-      border-radius: 11px;
-      background: #817bed18;
-      color: #7772e8;
-      font-size: 12px;
-      font-weight: 800
-    }
-
     .field {
-      margin-bottom: 17px
+      margin: 0;
+      min-width: 0
     }
 
     .field label {
@@ -283,11 +114,6 @@
       font-weight: 700;
       color: #525a76;
       margin-bottom: 8px
-    }
-
-    .field label span {
-      font-weight: 500;
-      color: #9a9fb1
     }
 
     .input-wrap {
@@ -317,9 +143,9 @@
     select {
       width: 100%;
       height: 47px;
-      border: 1px solid rgba(166, 174, 211, .27);
-      border-radius: 13px;
-      background: rgba(255, 255, 255, .52);
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #ffffff;
       color: var(--ink);
       outline: none;
       transition: .2s;
@@ -336,22 +162,22 @@
 
     input:focus,
     select:focus {
-      border-color: #8c88ed;
-      box-shadow: 0 0 0 4px #8984ef1c;
-      background: rgba(255, 255, 255, .82)
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px #1769aa20;
+      background: #ffffff
     }
 
-    .hint {
-      font-size: 10px;
-      color: #989db0;
-      margin-top: 6px;
-      line-height: 1.4
-    }
-
-    .two-fields {
+    #investmentForm {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      align-items: end;
       gap: 12px
+    }
+
+    .form-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px
     }
 
     .range-row {
@@ -367,8 +193,7 @@
       height: 5px;
       padding: 0;
       border: 0;
-      border-radius: 99px;
-      background: linear-gradient(90deg, #8a83f1, #8bcfca);
+      background: #d8e8f5;
       appearance: none;
       margin: 13px 0 3px
     }
@@ -377,10 +202,18 @@
       appearance: none;
       width: 16px;
       height: 16px;
-      border-radius: 50%;
+      border-radius: 50% !important;
       background: white;
-      border: 4px solid #827dec;
-      box-shadow: 0 2px 7px #7772e855
+      border: 4px solid var(--blue);
+      box-shadow: 0 2px 7px #d8e6f1
+    }
+
+    input[type=range]::-moz-range-thumb {
+      width: 10px;
+      height: 10px;
+      border-radius: 50% !important;
+      background: white;
+      border: 3px solid var(--blue)
     }
 
     .primary {
@@ -389,40 +222,50 @@
       justify-content: center;
       align-items: center;
       gap: 9px;
-      padding: 14px 18px;
-      border: 0;
-      border-radius: 14px;
+      padding: 12px 18px;
+      border: 1px solid rgba(255, 255, 255, .58);
+      border-radius: 7px;
       color: #fff;
       font-weight: 750;
       font-size: 13px;
-      background: linear-gradient(110deg, #827bed, #729de9 62%, #70cdb8);
-      box-shadow: 0 10px 22px #7779dd36;
-      transition: transform .2s, box-shadow .2s;
-      margin-top: 8px
+      background: rgba(23, 105, 170, .92);
+      box-shadow: 0 6px 16px rgba(23, 105, 170, .2), inset 0 1px 0 rgba(255, 255, 255, .24);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: background-color .2s, transform .2s
     }
 
     .primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 13px 27px #7779dd4a
+      background: #105b94;
+      transform: translateY(-1px)
     }
 
     .secondary {
-      border: 1px solid rgba(255, 255, 255, .85);
-      background: rgba(255, 255, 255, .42);
-      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, .9);
+      border-radius: 7px;
+      background: rgba(255, 255, 255, .68);
       padding: 10px 13px;
-      color: #6c7290;
+      color: var(--blue);
       font-weight: 700;
-      font-size: 11px
+      font-size: 11px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px)
+    }
+
+    .form-actions .primary,
+    .form-actions .secondary {
+      padding: 10px 12px;
+      margin: 0;
+      font-size: 12px
     }
 
     .disclaimer {
       display: flex;
       gap: 9px;
-      color: #9298ac;
+      color: var(--muted);
       font-size: 10px;
       line-height: 1.55;
-      margin: 16px 1px 0
+      margin: 10px 1px 0
     }
 
     .disclaimer svg {
@@ -433,66 +276,26 @@
     .dashboard {
       display: flex;
       flex-direction: column;
-      gap: 17px;
+      gap: 14px;
+      width: 100%;
       min-width: 0
-    }
-
-    .overview {
-      padding: 24px 25px 22px;
-      position: relative;
-      overflow: hidden
-    }
-
-    .overview:after {
-      content: "";
-      position: absolute;
-      width: 210px;
-      height: 210px;
-      border-radius: 50%;
-      right: -85px;
-      top: -120px;
-      background: radial-gradient(circle, #c4c2ff77, transparent 70%);
-      pointer-events: none
-    }
-
-    .overview-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 15px;
-      position: relative;
-      z-index: 1
-    }
-
-    .overview-top h2 {
-      font-size: 16px;
-      margin: 0 0 6px
-    }
-
-    .overview-top p {
-      font-size: 12px;
-      color: var(--muted);
-      margin: 0
-    }
-
-    .updated {
-      font-size: 10px;
-      color: #9298ac;
-      white-space: nowrap
     }
 
     .metrics {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 23px
+      gap: 14px;
+      margin-top: 12px
     }
 
     .metric {
-      border: 1px solid rgba(255, 255, 255, .72);
-      background: rgba(255, 255, 255, .34);
-      border-radius: 17px;
-      padding: 16px 15px;
+      border: 1px solid rgba(255, 255, 255, .92);
+      border-radius: 9px;
+      background: rgba(255, 255, 255, .62);
+      box-shadow: 0 8px 22px rgba(31, 74, 111, .06), inset 0 1px 0 rgba(255, 255, 255, .9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 17px 18px;
       min-width: 0
     }
 
@@ -500,25 +303,14 @@
       display: flex;
       align-items: center;
       gap: 7px;
-      color: #858ba3;
-      font-size: 10px;
+      color: var(--muted);
+      font-size: 12px;
       font-weight: 700;
-      margin-bottom: 13px
-    }
-
-    .metric-icon {
-      display: grid;
-      place-items: center;
-      width: 25px;
-      height: 25px;
-      border-radius: 9px;
-      background: #8a84ef19;
-      color: #7c77e8;
-      font-size: 13px
+      margin-bottom: 10px
     }
 
     .metric-value {
-      font-size: clamp(18px, 2vw, 25px);
+      font-size: clamp(21px, 2vw, 27px);
       letter-spacing: -1px;
       font-weight: 780;
       white-space: nowrap;
@@ -527,177 +319,17 @@
     }
 
     .metric-sub {
-      font-size: 10px;
-      color: #8c93a8;
+      font-size: 11px;
+      color: var(--muted);
       margin-top: 7px
     }
 
     .metric-sub.positive {
-      color: #3aa68d
-    }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin: 2px 2px -3px
-    }
-
-    .section-title h2 {
-      font-size: 15px;
-      margin: 0;
-      letter-spacing: -.3px
-    }
-
-    .section-title span {
-      font-size: 10px;
-      color: #8b91a7
-    }
-
-    .cloud-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px
-    }
-
-    .cloud-card {
-      padding: 17px 16px 16px;
-      min-width: 0;
-      position: relative;
-      overflow: hidden;
-      transition: transform .2s
-    }
-
-    .cloud-card:hover {
-      transform: translateY(-3px)
-    }
-
-    .cloud-top {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      margin-bottom: 17px
-    }
-
-    .cloud-logo {
-      width: 34px;
-      height: 34px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      font-size: 12px;
-      font-weight: 850;
-      letter-spacing: -.5px;
-      flex: none
-    }
-
-    .aws .cloud-logo {
-      background: #ffb85a26;
-      color: #c47c22
-    }
-
-    .azure .cloud-logo {
-      background: #5c9cf426;
-      color: #4083df
-    }
-
-    .gcp .cloud-logo {
-      background: #54c4a526;
-      color: #279c81
-    }
-
-    .cloud-name {
-      font-size: 12px;
-      font-weight: 800
-    }
-
-    .cloud-service {
-      font-size: 10px;
-      color: #969bb0;
-      margin-top: 3px;
-      line-height: 1.3
-    }
-
-    .status {
-      margin-left: auto;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #e5ad5e;
-      flex: none
-    }
-
-    .cloud-value {
-      font-size: 20px;
-      letter-spacing: -.7px;
-      font-weight: 780;
-      margin-bottom: 6px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis
-    }
-
-    .cloud-label {
-      font-size: 10px;
-      color: #8b91a7;
-      line-height: 1.5;
-      min-height: 29px
-    }
-
-    .cloud-divider {
-      height: 1px;
-      background: rgba(142, 151, 190, .15);
-      margin: 14px 0 11px
-    }
-
-    .cloud-foot {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 5px;
-      font-size: 10px;
-      color: #8c92a7
-    }
-
-    .cloud-foot strong {
-      font-size: 10px;
-      color: #5f6680
-    }
-
-    .cloud-card.aws {
-      background: linear-gradient(145deg, rgba(255, 255, 255, .57), rgba(255, 242, 219, .35))
-    }
-
-    .cloud-card.azure {
-      background: linear-gradient(145deg, rgba(255, 255, 255, .57), rgba(221, 236, 255, .37))
-    }
-
-    .cloud-card.gcp {
-      background: linear-gradient(145deg, rgba(255, 255, 255, .57), rgba(218, 249, 239, .39))
-    }
-
-    .cloud-card .status {
-      background: #e5ad5e
-    }
-
-    .cloud-card.simulated .status {
-      background: #64bfa5;
-      box-shadow: 0 0 0 4px #64bfa51c
-    }
-
-    .cloud-card .state-label {
-      font-size: 9px;
-      font-weight: 800;
-      color: #b07b2c
-    }
-
-    .cloud-card.simulated .state-label {
-      color: #329c83
+      color: var(--cyan)
     }
 
     .chart-panel {
-      padding: 22px 24px
+      padding: 18px
     }
 
     .chart-head {
@@ -705,18 +337,12 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 12px;
-      margin-bottom: 18px
+      margin-bottom: 12px
     }
 
     .chart-head h2 {
       font-size: 15px;
       margin: 0 0 5px
-    }
-
-    .chart-head p {
-      font-size: 11px;
-      color: var(--muted);
-      margin: 0
     }
 
     .legend {
@@ -737,16 +363,15 @@
       display: block;
       width: 7px;
       height: 7px;
-      border-radius: 50%;
-      background: #827bed
+      background: var(--blue)
     }
 
     .legend .mint {
-      background: #68c9b3
+      background: var(--cyan)
     }
 
     .chart-wrap {
-      height: 180px;
+      height: 220px;
       width: 100%;
       position: relative
     }
@@ -761,15 +386,11 @@
       display: flex;
       justify-content: space-between;
       gap: 15px;
-      border-top: 1px solid rgba(142, 151, 190, .16);
+      border-top: 1px solid var(--line);
       padding-top: 14px;
       margin-top: 9px;
       color: #8c92a7;
       font-size: 10px
-    }
-
-    .chart-bottom strong {
-      color: #626b85
     }
 
     .results-bottom {
@@ -779,20 +400,20 @@
     }
 
     .small-card {
-      padding: 19px 20px
+      padding: 18px
     }
 
     .small-card h3 {
       font-size: 12px;
-      margin: 0 0 14px
+      margin: 0 0 10px
     }
 
     .fx-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(142, 151, 190, .13);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
       gap: 8px
     }
 
@@ -805,18 +426,8 @@
       display: flex;
       align-items: center;
       gap: 9px;
-      font-size: 11px;
-      font-weight: 750
-    }
-
-    .flag {
-      width: 27px;
-      height: 27px;
-      border-radius: 9px;
-      background: #fff8;
-      display: grid;
-      place-items: center;
-      font-size: 13px
+      font-size: 12px;
+      font-weight: 700
     }
 
     .fx-value {
@@ -826,8 +437,8 @@
     }
 
     .fx-rate {
-      font-size: 9px;
-      color: #9a9fb0;
+      font-size: 10px;
+      color: var(--muted);
       margin-top: 3px;
       font-weight: 500
     }
@@ -836,20 +447,14 @@
       font-size: 24px;
       font-weight: 800;
       letter-spacing: -.8px;
-      margin: 4px 0 6px
-    }
-
-    .buying-caption {
-      font-size: 10px;
-      color: #8b91a7;
-      line-height: 1.5
+      margin: 4px 0 10px
     }
 
     .buying-bar {
-      height: 7px;
-      border-radius: 20px;
-      background: #e6e8f4;
-      margin: 15px 0 8px;
+      height: 8px;
+      border-radius: 4px;
+      background: #e3edf5;
+      margin: 12px 0 8px;
       overflow: hidden
     }
 
@@ -857,8 +462,8 @@
       display: block;
       height: 100%;
       width: 75%;
-      border-radius: 20px;
-      background: linear-gradient(90deg, #8b83ef, #76cdb6);
+      border-radius: 0 4px 4px 0;
+      background: var(--cyan);
       transition: width .35s
     }
 
@@ -869,82 +474,6 @@
       color: #9298ac
     }
 
-    .activity {
-      padding: 20px 23px
-    }
-
-    .activity-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 13px
-    }
-
-    .activity-head h2 {
-      font-size: 13px;
-      margin: 0
-    }
-
-    .activity-head span {
-      font-size: 10px;
-      color: #9a9fb0
-    }
-
-    .activity-row {
-      display: grid;
-      grid-template-columns: 30px minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 0;
-      border-top: 1px solid rgba(142, 151, 190, .13)
-    }
-
-    .activity-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      background: #fff9;
-      color: #8580e8;
-      font-size: 12px
-    }
-
-    .activity-text strong {
-      font-size: 11px;
-      display: block
-    }
-
-    .activity-text small {
-      display: block;
-      color: #969bb0;
-      font-size: 10px;
-      margin-top: 3px
-    }
-
-    .activity-time {
-      font-size: 10px;
-      color: #858ca3;
-      white-space: nowrap
-    }
-
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      color: #989db0;
-      font-size: 10px;
-      padding: 23px 0 30px
-    }
-
-    .footer-brand {
-      font-weight: 800;
-      color: #737a96;
-      letter-spacing: .3px
-    }
-
     .toast {
       position: fixed;
       bottom: 24px;
@@ -952,13 +481,12 @@
       transform: translate(-50%, 20px);
       opacity: 0;
       pointer-events: none;
-      background: #30354d;
+      background: #173b5e;
       color: white;
-      border: 1px solid #ffffff30;
-      border-radius: 13px;
+      border: 1px solid #365775;
       padding: 12px 17px;
       font-size: 12px;
-      box-shadow: 0 15px 35px #34364c30;
+      box-shadow: 0 15px 35px rgba(31, 74, 111, .18);
       transition: .25s;
       z-index: 10
     }
@@ -968,277 +496,62 @@
       transform: translate(-50%, 0)
     }
 
-    @media(max-width:980px) {
-      .layout {
-        grid-template-columns: 310px minmax(0, 1fr)
-      }
-
-      .cloud-grid {
-        grid-template-columns: 1fr
-      }
-
-      .cloud-card {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        align-items: center;
-        column-gap: 12px
-      }
-
-      .cloud-top {
-        margin-bottom: 0;
-        grid-column: 1
-      }
-
-      .cloud-value {
-        grid-column: 2;
-        grid-row: 1;
-        text-align: right
-      }
-
-      .cloud-label {
-        grid-column: 1;
-        grid-row: 2
-      }
-
-      .cloud-divider {
-        display: none
-      }
-
-      .cloud-foot {
-        grid-column: 2;
-        grid-row: 2;
-        align-self: start
-      }
-
-      .cloud-card .state-label {
-        display: none
-      }
-
-      .cloud-service {
-        max-width: 180px
-      }
-    }
-
-    @media(max-width:760px) {
-      .shell {
-        width: min(100% - 28px, 600px)
-      }
-
-      .topbar {
-        padding-top: 18px
-      }
-
-      .top-actions .pill:first-child {
-        display: none
-      }
-
-      .hero {
-        padding: 25px 0 22px;
-        display: block
-      }
-
-      .hero-note {
-        display: none
-      }
-
-      .layout {
-        grid-template-columns: 1fr
-      }
-
-      .panel {
-        padding: 21px
-      }
-
-      .dashboard {
-        gap: 14px
-      }
-
-      .metrics {
-        gap: 8px
-      }
-
-      .metric {
-        padding: 13px 10px
-      }
-
-      .metric-label {
-        font-size: 9px;
-        gap: 5px
-      }
-
-      .metric-icon {
-        width: 22px;
-        height: 22px
-      }
-
-      .metric-value {
-        font-size: 18px
-      }
-
-      .metric-sub {
-        font-size: 9px
-      }
-
-      .cloud-grid {
+    @media(max-width:900px) {
+      #investmentForm {
         grid-template-columns: repeat(3, minmax(0, 1fr))
       }
 
-      .cloud-card {
-        display: block;
-        padding: 13px 11px
+      .form-actions {
+        grid-column: span 3;
+        flex-direction: row
       }
 
-      .cloud-top {
-        display: block;
-        margin-bottom: 13px
+      .form-actions button {
+        flex: 1
+      }
+    }
+
+    @media(max-width:600px) {
+      .shell {
+        width: calc(100% - 24px)
       }
 
-      .cloud-logo {
-        margin-bottom: 9px
+      .topbar {
+        padding: 16px 0
       }
 
-      .cloud-name {
-        font-size: 11px
+      #investmentForm {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px
       }
 
-      .cloud-service {
-        font-size: 9px
+      .form-actions {
+        grid-column: span 2
       }
 
-      .cloud-top .status {
-        position: absolute;
-        top: 18px;
-        right: 13px
+      .metrics {
+        grid-template-columns: 1fr
       }
 
-      .cloud-value {
-        font-size: 16px;
-        text-align: left;
-        margin-bottom: 5px
+      .metric {
+        padding: 14px
       }
 
-      .cloud-label {
-        font-size: 9px;
-        min-height: 42px
-      }
-
-      .cloud-divider {
-        display: block;
-        margin: 10px 0
-      }
-
-      .cloud-foot {
-        font-size: 9px
+      .metric-label {
+        margin-bottom: 6px
       }
 
       .results-bottom {
         grid-template-columns: 1fr
       }
 
-      .chart-panel {
-        padding: 19px
-      }
-
-      .footer {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 7px
-      }
-    }
-
-    @media(max-width:420px) {
-      .shell {
-        width: calc(100% - 22px)
-      }
-
-      .brand {
-        font-size: 18px
-      }
-
-      .logo {
-        width: 38px;
-        height: 38px
-      }
-
-      .topbar {
-        gap: 8px
-      }
-
-      .top-actions .pill {
-        font-size: 10px;
-        padding: 8px 10px
-      }
-
-      .metrics {
-        grid-template-columns: 1fr 1fr
-      }
-
-      .metric:last-child {
-        grid-column: 1/-1
-      }
-
-      .cloud-grid {
-        grid-template-columns: 1fr
-      }
-
-      .cloud-card {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        column-gap: 10px
-      }
-
-      .cloud-top {
-        display: flex;
-        grid-column: 1;
-        margin-bottom: 12px
-      }
-
-      .cloud-logo {
-        margin: 0
-      }
-
-      .cloud-value {
-        grid-column: 2;
-        grid-row: 1;
-        text-align: right;
-        font-size: 18px
-      }
-
-      .cloud-label {
-        grid-column: 1;
-        grid-row: 2;
-        min-height: 0
-      }
-
-      .cloud-divider {
-        display: none
-      }
-
-      .cloud-foot {
-        grid-column: 2;
-        grid-row: 2;
-        align-self: start
-      }
-
-      .cloud-card .state-label {
-        display: none
-      }
-
-      .overview {
-        padding: 20px 16px
-      }
-
-      .overview-top {
-        display: block
-      }
-
-      .updated {
-        display: block;
-        margin-top: 10px
+      .chart-head {
+        flex-direction: column
       }
 
       .chart-bottom {
-        font-size: 9px
+        flex-wrap: wrap;
+        font-size: 10px
       }
     }
   </style>
@@ -1247,155 +560,62 @@
 <body>
   <div class="shell">
     <header class="topbar">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
-            <path d="M4 17.5 9 12l3.4 3.2L20 6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-              stroke-linejoin="round" />
-            <path d="M15.5 6.5H20v4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg></div>
-        <div>IHMInvest<small>INVESTMENT INTELLIGENCE</small></div>
-      </div>
-      <div class="top-actions">
-        <span class="pill"><span class="dot"></span> Ambiente de demonstração</span>
-        <span class="pill">✧ <span id="headerDate">Simulação local</span></span>
-      </div>
+      <div class="brand">IHMInvest</div>
     </header>
-
-    <section class="hero">
-      <div>
-        <div class="eyebrow"><span class="spark">✳</span> Seu futuro, em perspectiva</div>
-        <h1>Faça seu dinheiro<br><span>trabalhar por você.</span></h1>
-        <p>Projete seus investimentos, compare moedas e entenda o impacto da inflação no seu poder de compra — tudo em
-          uma visão simples e integrada.</p>
-      </div>
-      <aside class="hero-note"><strong>✧ Clareza para decidir melhor</strong>Simulações transparentes para explorar
-        cenários e visualizar o potencial dos seus investimentos.</aside>
-    </section>
 
     <main class="layout">
       <aside class="glass panel">
         <div class="section-heading">
-          <div>
-            <h2>Monte sua simulação</h2>
-            <p>Personalize os parâmetros do seu cenário financeiro.</p>
-          </div>
-          <span class="step">01</span>
+          <h2>Parâmetros</h2>
         </div>
         <form id="investmentForm">
           <div class="field">
-            <label for="initial">Investimento inicial <span>Valor único</span></label>
+            <label for="initial">Investimento inicial</label>
             <div class="input-wrap"><span class="prefix">R$</span><input class="with-prefix" id="initial" name="initial"
                 type="number" min="0" step="100" value="10000" required></div>
           </div>
           <div class="field">
-            <label for="monthly">Aporte mensal <span>Recorrente</span></label>
+            <label for="monthly">Aporte mensal</label>
             <div class="input-wrap"><span class="prefix">R$</span><input class="with-prefix" id="monthly" name="monthly"
                 type="number" min="0" step="50" value="500" required></div>
-            <div class="hint">Quanto pretende adicionar ao investimento por mês?</div>
-          </div>
-          <div class="two-fields">
-            <div class="field">
-              <label for="interest">Juros ao ano</label>
-              <div class="input-wrap"><input class="with-suffix" id="interest" name="interest" type="number" min="0"
-                  max="100" step=".1" value="10" required><span class="suffix">% a.a.</span></div>
-            </div>
-            <div class="field">
-              <label for="inflation">Inflação ao ano</label>
-              <div class="input-wrap"><input class="with-suffix" id="inflation" name="inflation" type="number" min="0"
-                  max="100" step=".1" value="4.5" required><span class="suffix">% a.a.</span></div>
-            </div>
           </div>
           <div class="field">
-            <label for="months">Horizonte do investimento <span id="monthsLabel">5 anos</span></label>
-            <input id="months" name="months" type="range" min="1" max="360" value="60">
-            <div class="range-row"><span>1 mês</span><strong id="monthsExact">60 meses</strong><span>30 anos</span>
-            </div>
+            <label for="interest">Juros ao ano</label>
+            <div class="input-wrap"><input class="with-suffix" id="interest" name="interest" type="number" min="0"
+                max="100" step=".1" value="10" required><span class="suffix">% a.a.</span></div>
           </div>
-          <button class="primary" type="submit">✧ Atualizar projeção <span aria-hidden="true">↗</span></button>
-          <button class="secondary" type="button" id="resetBtn" style="width:100%;margin-top:9px">Restaurar valores de
-            exemplo</button>
+          <div class="field">
+            <label for="inflation">Inflação ao ano</label>
+            <div class="input-wrap"><input class="with-suffix" id="inflation" name="inflation" type="number" min="0"
+                max="100" step=".1" value="4.5" required><span class="suffix">% a.a.</span></div>
+          </div>
+          <div class="field">
+            <label for="months">Prazo <span id="monthsLabel">5 anos</span></label>
+            <input id="months" name="months" type="range" min="1" max="360" value="60">
+          </div>
+          <div class="form-actions">
+            <button class="primary" type="submit">Calcular</button>
+          </div>
         </form>
-        <div class="disclaimer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7" />
-            <path d="M12 11v5m0-8h.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
-          </svg><span>Esta é uma demonstração com cálculos locais, câmbio ilustrativo e inflação estimada. Não
-            representa recomendação financeira nem consulta serviços externos.</span></div>
+        <p class="disclaimer">Câmbio fixo: USD R$ 5,50 · EUR R$ 6,00. Valores sem impostos ou taxas.</p>
       </aside>
 
-      <section class="dashboard" aria-label="Dashboard de resultados">
-        <div class="glass overview">
-          <div class="overview-top">
-            <div>
-              <h2>Visão geral do patrimônio</h2>
-              <p>Uma leitura consolidada do cenário projetado.</p>
-            </div>
-            <span class="updated" id="lastUpdated">◷ Aguardando simulação</span>
-          </div>
-          <div class="metrics">
-            <article class="metric">
-              <div class="metric-label"><span class="metric-icon">↗</span> Patrimônio projetado</div>
-              <div class="metric-value" id="totalValue">R$ 0,00</div>
-              <div class="metric-sub" id="totalSub">Montante bruto estimado</div>
-            </article>
-            <article class="metric">
-              <div class="metric-label"><span class="metric-icon">◈</span> Total investido</div>
-              <div class="metric-value" id="investedValue">R$ 0,00</div>
-              <div class="metric-sub">Capital inicial + aportes</div>
-            </article>
-            <article class="metric">
-              <div class="metric-label"><span class="metric-icon">✧</span> Rendimentos</div>
-              <div class="metric-value" id="profitValue">R$ 0,00</div>
-              <div class="metric-sub positive" id="profitSub">Ganho bruto estimado</div>
-            </article>
-          </div>
-        </div>
-
-        <div class="section-title">
-          <h2>Processamento por nuvem</h2><span>3 módulos · resultados demonstrativos</span>
-        </div>
-        <div class="cloud-grid">
-          <article class="glass cloud-card aws simulated" id="awsCard">
-            <div class="cloud-top">
-              <div class="cloud-logo">aws</div>
-              <div>
-                <div class="cloud-name">AWS Lambda</div>
-                <div class="cloud-service">Juros compostos</div>
-              </div><span class="status"></span>
-            </div>
-            <div class="cloud-value" id="awsValue">R$ 0,00</div>
-            <div class="cloud-label">Montante bruto e rendimentos estimados.</div>
-            <div class="cloud-divider"></div>
-            <div class="cloud-foot"><span class="state-label">● Simulado localmente</span><strong id="awsLatency">—
-                ms</strong></div>
+      <section class="dashboard" aria-label="Resultados da projeção">
+        <div class="metrics">
+          <article class="metric">
+            <div class="metric-label">Patrimônio projetado</div>
+            <div class="metric-value" id="totalValue">R$ 0,00</div>
+            <div class="metric-sub" id="totalSub">Ao fim do prazo</div>
           </article>
-          <article class="glass cloud-card azure simulated" id="azureCard">
-            <div class="cloud-top">
-              <div class="cloud-logo">Az</div>
-              <div>
-                <div class="cloud-name">Azure Functions</div>
-                <div class="cloud-service">Conversão cambial</div>
-              </div><span class="status"></span>
-            </div>
-            <div class="cloud-value" id="azureValue">US$ 0,00</div>
-            <div class="cloud-label">Patrimônio equivalente em dólar e euro.</div>
-            <div class="cloud-divider"></div>
-            <div class="cloud-foot"><span class="state-label">● Câmbio ilustrativo</span><strong id="azureLatency">—
-                ms</strong></div>
+          <article class="metric">
+            <div class="metric-label">Total investido</div>
+            <div class="metric-value" id="investedValue">R$ 0,00</div>
+            <div class="metric-sub">Capital inicial + aportes</div>
           </article>
-          <article class="glass cloud-card gcp simulated" id="gcpCard">
-            <div class="cloud-top">
-              <div class="cloud-logo">G</div>
-              <div>
-                <div class="cloud-name">Google Cloud</div>
-                <div class="cloud-service">Inflação e poder de compra</div>
-              </div><span class="status"></span>
-            </div>
-            <div class="cloud-value" id="gcpValue">R$ 0,00</div>
-            <div class="cloud-label">Valor real estimado após inflação.</div>
-            <div class="cloud-divider"></div>
-            <div class="cloud-foot"><span class="state-label">● Simulado localmente</span><strong id="gcpLatency">—
-                ms</strong></div>
+          <article class="metric">
+            <div class="metric-label">Rendimentos</div>
+            <div class="metric-value" id="profitValue">R$ 0,00</div>
+            <div class="metric-sub positive" id="profitSub">Ganho bruto estimado</div>
           </article>
         </div>
 
@@ -1403,7 +623,6 @@
           <div class="chart-head">
             <div>
               <h2>Trajetória do patrimônio</h2>
-              <p>Acúmulo projetado ao longo do tempo</p>
             </div>
             <div class="legend"><span><i></i> Patrimônio bruto</span><span><i class="mint"></i> Total aportado</span>
             </div>
@@ -1415,60 +634,27 @@
 
         <div class="results-bottom">
           <article class="glass small-card">
-            <h3>◎ Conversão internacional <span style="color:#a0a5b7;font-weight:500">· ilustrativa</span></h3>
+            <h3>Conversão internacional</h3>
             <div class="fx-row">
-              <div class="fx-currency"><span class="flag">🇺🇸</span><span>Dólar americano<small
-                    style="display:block;color:#989eb1;font-size:9px;font-weight:500;margin-top:3px">USD · cotação
-                    demonstrativa</small></span></div>
+              <div class="fx-currency">Dólar americano</div>
               <div class="fx-value" id="usdValue">US$ 0,00<div class="fx-rate" id="usdRate">R$ 5,50 / USD</div>
               </div>
             </div>
             <div class="fx-row">
-              <div class="fx-currency"><span class="flag">🇪🇺</span><span>Euro<small
-                    style="display:block;color:#989eb1;font-size:9px;font-weight:500;margin-top:3px">EUR · cotação
-                    demonstrativa</small></span></div>
+              <div class="fx-currency">Euro</div>
               <div class="fx-value" id="eurValue">€ 0,00<div class="fx-rate" id="eurRate">R$ 6,00 / EUR</div>
               </div>
             </div>
           </article>
           <article class="glass small-card">
-            <h3>✧ Poder de compra futuro</h3>
+            <h3>Poder de compra futuro</h3>
             <div class="buying-number" id="realValue">R$ 0,00</div>
-            <div class="buying-caption">Valor real aproximado, expresso em poder de compra de hoje após descontar a
-              inflação estimada.</div>
             <div class="buying-bar"><span id="buyingBar"></span></div>
-            <div class="buying-foot"><span>Valor nominal</span><strong id="realPercent">0% do nominal</strong></div>
+            <div class="buying-foot"><strong id="realPercent">0% do nominal</strong></div>
           </article>
-        </div>
-
-        <div class="glass activity">
-          <div class="activity-head">
-            <h2>Resumo do processamento</h2><span id="activityStatus">Demonstração local</span>
-          </div>
-          <div class="activity-row">
-            <div class="activity-icon">↗</div>
-            <div class="activity-text"><strong>AWS Lambda · Juros compostos</strong><small id="awsActivity">Cálculo
-                local de aportes e rendimentos.</small></div>
-            <div class="activity-time" id="awsActivityTime">Simulado</div>
-          </div>
-          <div class="activity-row">
-            <div class="activity-icon">◎</div>
-            <div class="activity-text"><strong>Azure Functions · Câmbio</strong><small id="azureActivity">Conversão por
-                taxas de exemplo fixas.</small></div>
-            <div class="activity-time" id="azureActivityTime">Simulado</div>
-          </div>
-          <div class="activity-row">
-            <div class="activity-icon">✧</div>
-            <div class="activity-text"><strong>Google Cloud · Inflação</strong><small id="gcpActivity">Deflação do valor
-                nominal pelo índice estimado.</small></div>
-            <div class="activity-time" id="gcpActivityTime">Simulado</div>
-          </div>
         </div>
       </section>
     </main>
-    <footer class="footer"><span class="footer-brand">IHMInvest <span style="font-weight:500">· Investment
-          Intelligence</span></span><span>Protótipo acadêmico · Grupo A · SaaS multicloud</span><span>Sem conexão com
-        APIs ou serviços externos</span></footer>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script>
@@ -1500,7 +686,7 @@
       const profit = balance - invested;
       const inflationFactor = Math.pow(1 + inflation, months / 12);
       const real = balance / inflationFactor;
-      // Cotações fixas apenas para demonstração; não são cotações de mercado.
+      // Câmbio fixo usado na conversão.
       const usdRate = 5.50, eurRate = 6.00;
       return { initial, monthly, annualRate, inflation, months, balance, invested, profit, real, usd: balance / usdRate, eur: balance / eurRate, usdRate, eurRate, points };
     }
@@ -1519,15 +705,13 @@
       ctx.font = '10px system-ui'; ctx.fillStyle = '#9ba1b4'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
       for (let i = 0; i < 4; i++) {
         const yy = pad.t + (ch / 3) * i;
-        ctx.beginPath(); ctx.setLineDash([3, 5]); ctx.strokeStyle = 'rgba(137,145,183,.20)'; ctx.moveTo(pad.l, yy); ctx.lineTo(w - pad.r, yy); ctx.stroke(); ctx.setLineDash([]);
+        ctx.beginPath(); ctx.setLineDash([3, 5]); ctx.strokeStyle = '#dce7f1'; ctx.moveTo(pad.l, yy); ctx.lineTo(w - pad.r, yy); ctx.stroke(); ctx.setLineDash([]);
       }
-      const gradient = ctx.createLinearGradient(0, pad.t, 0, h);
-      gradient.addColorStop(0, 'rgba(130,123,237,.24)'); gradient.addColorStop(1, 'rgba(130,123,237,0)');
       ctx.beginPath(); points.forEach((p, i) => i ? ctx.lineTo(x(i), y(p.total)) : ctx.moveTo(x(i), y(p.total)));
-      ctx.lineTo(x(points.length - 1), pad.t + ch); ctx.lineTo(x(0), pad.t + ch); ctx.closePath(); ctx.fillStyle = gradient; ctx.fill();
+      ctx.lineTo(x(points.length - 1), pad.t + ch); ctx.lineTo(x(0), pad.t + ch); ctx.closePath(); ctx.fillStyle = '#e7f1fa'; ctx.fill();
       const line = (key, color, width) => { ctx.beginPath(); points.forEach((p, i) => i ? ctx.lineTo(x(i), y(p[key])) : ctx.moveTo(x(i), y(p[key]))); ctx.strokeStyle = color; ctx.lineWidth = width; ctx.lineJoin = 'round'; ctx.lineCap = 'round'; ctx.stroke() };
-      line('invested', '#68c9b3', 2); line('total', '#827bed', 2.6);
-      const last = points[points.length - 1]; ctx.beginPath(); ctx.arc(x(points.length - 1), y(last.total), 4, 0, Math.PI * 2); ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#827bed'; ctx.lineWidth = 2; ctx.stroke();
+      line('invested', '#0789a8', 2); line('total', '#1769aa', 2.6);
+      const last = points[points.length - 1]; ctx.beginPath(); ctx.arc(x(points.length - 1), y(last.total), 4, 0, Math.PI * 2); ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = '#1769aa'; ctx.lineWidth = 2; ctx.stroke();
       ctx.fillStyle = '#9ba1b4'; ctx.textAlign = 'left'; ctx.fillText('Início', pad.l, h - 8);
       ctx.textAlign = 'right'; ctx.fillText(`${last.m} meses`, w - pad.r, h - 8);
     }
@@ -1540,29 +724,13 @@
         $('profitValue').textContent = money(d.profit);
         $('totalSub').textContent = `Ao fim de ${d.months} ${d.months === 1 ? 'mês' : 'meses'}`;
         $('profitSub').textContent = `${d.invested > 0 ? fmt(d.profit / d.invested * 100, 1) : '0'}% sobre o total aportado`;
-        $('awsValue').textContent = money(d.balance);
-        $('azureValue').textContent = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'USD' }).format(d.usd);
-        $('gcpValue').textContent = money(d.real);
         $('usdValue').innerHTML = `${money(d.usd, 'USD')}<div class="fx-rate">R$ ${fmt(d.usdRate, 2)} / USD</div>`;
         $('eurValue').innerHTML = `${money(d.eur, 'EUR')}<div class="fx-rate">R$ ${fmt(d.eurRate, 2)} / EUR</div>`;
         $('realValue').textContent = money(d.real);
         const pct = d.balance > 0 ? Math.max(0, Math.min(100, d.real / d.balance * 100)) : 0;
         $('buyingBar').style.width = pct + '%'; $('realPercent').textContent = `${fmt(pct, 1)}% do nominal`;
         $('monthsLabel').textContent = d.months % 12 === 0 ? `${d.months / 12} ${d.months / 12 === 1 ? 'ano' : 'anos'}` : `${d.months} meses`;
-        $('monthsExact').textContent = `${d.months} ${d.months === 1 ? 'mês' : 'meses'}`;
         $('chartTerm').textContent = `${d.months} meses`; $('chartRate').textContent = `${fmt(d.annualRate * 100, 1)}%`;
-        $('lastUpdated').textContent = '◷ Atualizado agora · local';
-        // Latências artificiais só para demonstrar a apresentação de métricas no dashboard.
-        const latency = [1.4, 1.1, 1.2];
-        ['aws', 'azure', 'gcp'].forEach((name, i) => {
-          $(name + 'Latency').textContent = latency[i].toFixed(1) + ' ms*';
-          $(name + 'ActivityTime').textContent = latency[i].toFixed(1) + ' ms*';
-          $(name + 'Card').classList.add('simulated');
-        });
-        $('awsActivity').textContent = `Montante ${money(d.balance)} · rendimentos ${money(d.profit)}.`;
-        $('azureActivity').textContent = `USD ${fmt(d.usd, 2)} · EUR ${fmt(d.eur, 2)} com taxas fixas de exemplo.`;
-        $('gcpActivity').textContent = `Valor real ${money(d.real)} após inflação anual de ${fmt(d.inflation * 100, 1)}%.`;
-        $('activityStatus').textContent = '3 módulos calculados localmente';
         chartData = { months: d.points.map(p => p.m), invested: d.points.map(p => p.invested), total: d.points.map(p => p.total) };
         drawChart(d.points);
         showToast('Projeção local atualizada com sucesso.');
@@ -1574,13 +742,7 @@
     $('months').addEventListener('input', () => {
       const m = Number($('months').value);
       $('monthsLabel').textContent = m % 12 === 0 ? `${m / 12} ${m / 12 === 1 ? 'ano' : 'anos'}` : `${m} meses`;
-      $('monthsExact').textContent = `${m} ${m === 1 ? 'mês' : 'meses'}`;
     });
-    $('resetBtn').addEventListener('click', () => {
-      $('initial').value = 10000; $('monthly').value = 500; $('interest').value = 10; $('inflation').value = 4.5; $('months').value = 60;
-      $('monthsLabel').textContent = '5 anos'; $('monthsExact').textContent = '60 meses'; simulate();
-    });
-    $('headerDate').textContent = new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date());
     window.addEventListener('resize', () => { if (chartData.months.length) { drawChart(chartData.months.map((m, i) => ({ m, invested: chartData.invested[i], total: chartData.total[i] }))) } });
     simulate();
   </script>
