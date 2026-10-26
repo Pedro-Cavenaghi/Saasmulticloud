@@ -616,10 +616,10 @@
       }
       if (name === 'azure') {
         return {
-          usd: requireNumber(data, 'usd'),
-          eur: requireNumber(data, 'eur'),
-          usdRate: requireNumber(data, 'usdRate'),
-          eurRate: requireNumber(data, 'eurRate')
+          usd: requireNumber(data, 'valorDolar'),
+          eur: requireNumber(data, 'valorEuro'),
+          usdRate: requireNumber(data, 'cotacaoDolar'),
+          eurRate: requireNumber(data, 'cotacaoEuro')
         };
       }
       return { real: requireNumber(data, 'real') };
@@ -698,7 +698,7 @@
       try {
         const d = getProjection();
         renderAws(d);
-        renderAzure(d);
+        /*renderAzure(d);*/
         renderGcp({ real: d.real }, d.balance, d.inflation);
         $('monthsLabel').textContent = d.months % 12 === 0 ? `${d.months / 12} ${d.months / 12 === 1 ? 'ano' : 'anos'}` : `${d.months} meses`;
         $('chartTerm').textContent = `${d.months} meses`; $('chartRate').textContent = `${fmt(d.annualRate * 100, 1)}%`;
@@ -712,9 +712,9 @@
             months: d.months
           }, { balance: d.balance, invested: d.invested, profit: d.profit }, renderAws),
           processModule('azure', {
-            balance: d.balance,
-            usdRate: d.usdRate,
-            eurRate: d.eurRate
+            valorReais: d.balance,
+            cotacaoDolar: d.usdRate,
+            cotacaoEuro: d.eurRate
           }, { usd: d.usd, eur: d.eur, usdRate: d.usdRate, eurRate: d.eurRate }, renderAzure),
           processModule('gcp', {
             balance: d.balance,
