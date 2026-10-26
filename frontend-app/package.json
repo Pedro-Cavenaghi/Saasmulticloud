@@ -1,0 +1,12 @@
+{
+  "name": "ihminvest-frontend",
+  "version": "1.0.0",
+  "description": "Dashboard SaaS Multicloud do IHMInvest",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve . -l $PORT"
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
+  }
+}
