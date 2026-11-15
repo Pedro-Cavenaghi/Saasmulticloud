@@ -2,17 +2,6 @@ from http.server import BaseHTTPRequestHandler
 import json
 
 class handler(BaseHTTPRequestHandler):
-
-    def _set_cors_headers(self, status_code):
-        self.send_response(status_code)
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-
-    def do_OPTIONS(self):
-        self._set_cors_headers(204)
-        self.end_headers()
-
     def do_POST(self):
         try:
             content_length = int(self.headers.get('Content-Length', 0))
@@ -46,7 +35,7 @@ class handler(BaseHTTPRequestHandler):
             self._send_json(500, {'error': str(e)})
 
     def _send_json(self, status_code, payload):
-        self._set_cors_headers(status_code)
+        self.send_response(status_code)
         self.send_header('Content-Type', 'application/json')
         self.end_headers()
         self.wfile.write(json.dumps(payload).encode('utf-8'))
