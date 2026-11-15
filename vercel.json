@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/juros",
+      "destination": "/vercel-functions/juros"
+    }
+  ]
+}
