@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "vercel-functions/juros.py": {
+      "maxDuration": 10
+    }
+  },
   "rewrites": [
     {
       "source": "/api/juros",
