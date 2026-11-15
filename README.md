@@ -25,7 +25,7 @@ Aplicação web de página única (SPA) para projeção de investimentos e conso
 ## ⚙️ Como Executar e Configurar
 
 1. **Frontend:** Pode ser acessado diretamente pelo link de produção no Railway ou executado localmente via servidor HTTP (ex: *Live Server* no VS Code).
-2. **Endpoints:** As URLs de produção da Vercel, Azure e GCP devem estar configuradas no objeto `API_ENDPOINTS` localizado no final de `frontend-app/ihminvest-frontend.html`.
+2. **Endpoints:** As URLs de produção da Vercel, Azure e GCP devem estar configuradas no objeto `API_ENDPOINTS` localizado no final de `frontend-app/index.html`.
 
 ### Comportamento de Resiliência
 O frontend envia requisições POST JSON em paralelo com timeout de 8 segundos. Cada módulo exibe o provedor, o status da requisição e a latência real. Caso uma URL esteja vazia ou ocorra falha de rede, o sistema ativa automaticamente o **fallback local** para garantir que a interface permaneça funcional, exibindo o aviso de indisponibilidade pontual do serviço.
