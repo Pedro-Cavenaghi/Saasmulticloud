@@ -848,7 +848,7 @@
     const money = (v, currency = 'BRL') => new Intl.NumberFormat('pt-BR', { style: 'currency', currency, maximumFractionDigits: 2 }).format(Number.isFinite(v) ? v : 0);
     const fmt = (v, digits = 1) => new Intl.NumberFormat('pt-BR', { maximumFractionDigits: digits }).format(v);
     const API_ENDPOINTS = {
-      aws: '',
+      aws: 'https://saasmulticloud-google-functions.vercel.app/api/juros',
       azure: 'https://conversorinternacional-ckfhcba3axdjc0cw.northcentralus-01.azurewebsites.net/api/conversorInternacional',
       gcp: 'https://projetor-inflacao-bnizxb6syq-rj.a.run.app'
     };
