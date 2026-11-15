@@ -1,9 +1,11 @@
 {
-  "functions": {
-    "vercel-functions/juros.py": {
-      "maxDuration": 10
+  "version": 2,
+  "builds": [
+    {
+      "src": "vercel-functions/juros.py",
+      "use": "@vercel/python"
     }
-  },
+  ],
   "rewrites": [
     {
       "source": "/api/juros",
