@@ -1,34 +1,51 @@
 # IHMInvest
 
-Aplicação web de página única para projetar investimentos e consolidar resultados de AWS Lambda, Azure Functions e Google Cloud Functions.
+Aplicação web de página única (SPA) para projeção de investimentos e consolidação de resultados em arquitetura Serverless Multicloud (Vercel, Azure Functions e Google Cloud Functions).
 
-## Estrutura
+## 🚀 Arquitetura e Tecnologias
 
-- `frontend-app/ihminvest-frontend.html` — interface, gráfico, chamadas HTTP e fallback local.
-- `aws-lambda/` — implementação AWS (ainda não configurada).
-- `azure-functions/` — implementação Azure (ainda não configurada).
-- `google-functions/` — implementação Google Cloud (ainda não configurada).
-- `Atividade 04 - Ecossistema SaaS Multicloud Integrado.pdf` — enunciado da atividade.
-- `IHMInvest Fluxo.docx` — fluxo da aplicação.
+- **Frontend:** SPA desenvolvida em HTML5/JavaScript com gráficos dinâmicos, hospedada no **Railway**.
+- **Função 01 (Cálculo de Juros Compostos):** Hospedada via Serverless Functions na **Vercel** (substituindo a AWS Lambda).
+- **Função 02 (Conversão de Moedas - USD/EUR):** Hospedada no **Azure Functions**.
+- **Função 03 (Ajuste de Inflação - IPCA):** Hospedada no **Google Cloud Functions**.
 
-## Executar
+---
 
-Abra o HTML no navegador para usar os cálculos locais. Para chamadas às APIs, sirva o frontend por HTTP (por exemplo, com Live Server no VS Code) e configure os endpoints no objeto `API_ENDPOINTS`, no fim de `frontend-app/ihminvest-frontend.html`.
+## 📁 Estrutura do Repositório
 
-O frontend envia requisições `POST` JSON em paralelo, com timeout de 8 segundos. Cada módulo mostra o provedor, o estado da chamada e a latência real. Se a URL estiver vazia ou a chamada falhar, somente aquele módulo usa o cálculo local; falhas de serviço aparecem como “Serviço temporariamente indisponível”.
+- `frontend-app/ihminvest-frontend.html` — Interface de usuário, gráficos, lógica de chamadas HTTP assíncronas e camada de fallback local.
+- `api/juros.py` — Função Serverless em Python (Vercel) para o cálculo de juros compostos.
+- `azure-functions/` — Código-fonte e configurações da função Azure.
+- `google-functions/` — Código-fonte e configurações da função Google Cloud.
+- `Atividade 04 - Ecossistema SaaS Multicloud Integrado.pdf` — Enunciado da atividade acadêmica.
+- `IHMInvest Fluxo.docx` — Documentação do fluxo da aplicação.
 
-## Contratos HTTP esperados
+---
 
-Todas as respostas devem ser JSON com valores numéricos:
+## ⚙️ Como Executar e Configurar
 
-| Provedor | Entrada | Resposta |
-|---|---|---|
-| AWS Lambda | `initial`, `monthly`, `annualRate` (decimal), `months` | `balance`, `invested`, `profit` |
-| Azure Functions | `balance`, `usdRate`, `eurRate` | `usd`, `eur`, `usdRate`, `eurRate` |
-| Google Cloud Functions | `balance`, `inflation` (decimal), `months` | `real` |
+1. **Frontend:** Pode ser acessado diretamente pelo link de produção no Railway ou executado localmente via servidor HTTP (ex: *Live Server* no VS Code).
+2. **Endpoints:** As URLs de produção da Vercel, Azure e GCP devem estar configuradas no objeto `API_ENDPOINTS` localizado no final de `frontend-app/ihminvest-frontend.html`.
 
-O campo de IPCA não é pedido ao usuário: o frontend usa uma taxa estimada fixa de 4,5% a.a., definida em `ESTIMATED_INFLATION_RATE`, e a envia ao Google Cloud Functions.
+### Comportamento de Resiliência
+O frontend envia requisições POST JSON em paralelo com timeout de 8 segundos. Cada módulo exibe o provedor, o status da requisição e a latência real. Caso uma URL esteja vazia ou ocorra falha de rede, o sistema ativa automaticamente o **fallback local** para garantir que a interface permaneça funcional, exibindo o aviso de indisponibilidade pontual do serviço.
 
-As funções precisam aceitar `POST` com `Content-Type: application/json` e permitir por CORS a origem usada pelo frontend. Atualmente, as três pastas de funções estão vazias e os endpoints não estão configurados.
+---
 
-As projeções são estimativas e não constituem recomendação financeira.
+## 🔌 Contratos HTTP Esperados
+
+As requisições utilizam o método `POST` com `Content-Type: application/json` e suporte a CORS (`Access-Control-Allow-Origin: *`):
+
+- **Vercel (Juros Compostos):**
+  - *Entrada:* `initial`, `monthly`, `annualRate` (decimal), `months`
+  - *Resposta:* `balance`, `invested`, `profit`
+- **Azure Functions (Conversão):**
+  - *Entrada:* `balance`, `usdRate`, `eurRate`
+  - *Resposta:* `usd`, `eur`, `usdRate`, `eurRate`
+- **Google Cloud Functions (Inflação):**
+  - *Entrada:* `balance`, `inflation` (decimal), `months`
+  - *Resposta:* `real` *(Nota: A taxa de inflação é injetada automaticamente pelo frontend através da constante `ESTIMATED_INFLATION_RATE` em 4,5% a.a.)*
+
+---
+
+> *As projeções exibidas são estimativas matemáticas para fins acadêmicos e não constituem recomendação financeira.*
