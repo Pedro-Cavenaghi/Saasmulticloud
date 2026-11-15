@@ -133,9 +133,8 @@
       align-items: center;
       gap: 10px;
       background: var(--glass);
-      padding: 6px 14px 6px 14px;
+      padding: 6px 14px;
       border-radius: var(--radius-pill);
-      
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
@@ -394,7 +393,6 @@
       animation: pulseGlow 3.5s infinite ease-in-out;
     }
 
-    /* Feixe de brilho animado passando pelo botão */
     .primary::before {
       content: "";
       position: absolute;
@@ -423,15 +421,9 @@
     }
 
     @keyframes shimmerSweep {
-      0% {
-        left: -75%;
-      }
-      30% {
-        left: 135%;
-      }
-      100% {
-        left: 135%;
-      }
+      0% { left: -75%; }
+      30% { left: 135%; }
+      100% { left: 135%; }
     }
 
     .primary:hover {
@@ -703,7 +695,6 @@
   <div class="shell">
     <header class="topbar">
       <div class="brand">
-        
         <span>IHM Invest</span>
       </div>
 
@@ -781,15 +772,16 @@
 
       <section class="dashboard" aria-label="Resultados da projeção">
         <section class="module-grid" aria-label="Resultados por provedor">
+          <!-- Card Vercel Functions (substituindo AWS Lambda) -->
           <article class="glass module-card">
             <div class="module-head">
-              <span class="module-provider">AWS Lambda</span>
-              <span class="module-status" id="awsStatus" data-state="pending" role="status" aria-live="polite">Aguardando</span>
+              <span class="module-provider">Vercel Functions</span>
+              <span class="module-status" id="vercelStatus" data-state="pending" role="status" aria-live="polite">Aguardando</span>
             </div>
             <div class="module-label">Patrimônio projetado</div>
-            <div class="module-value" id="awsValue">R$ 0,00</div>
-            <div class="module-detail" id="awsDetail">Total investido e rendimentos</div>
-            <div class="module-latency" id="awsLatency">Sem chamada</div>
+            <div class="module-value" id="vercelValue">R$ 0,00</div>
+            <div class="module-detail" id="vercelDetail">Total investido e rendimentos</div>
+            <div class="module-latency" id="vercelLatency">Sem chamada</div>
           </article>
           <article class="glass module-card">
             <div class="module-head">
@@ -847,12 +839,14 @@
     const $ = id => document.getElementById(id);
     const money = (v, currency = 'BRL') => new Intl.NumberFormat('pt-BR', { style: 'currency', currency, maximumFractionDigits: 2 }).format(Number.isFinite(v) ? v : 0);
     const fmt = (v, digits = 1) => new Intl.NumberFormat('pt-BR', { maximumFractionDigits: digits }).format(v);
+    
     const API_ENDPOINTS = {
-      aws: 'https://saasmulticloud-google-functions.vercel.app/api/juros',
+      vercel: 'https://saasmulticloud-google-functions.vercel.app/api/juros',
       azure: 'https://conversorinternacional-ckfhcba3axdjc0cw.northcentralus-01.azurewebsites.net/api/conversorInternacional',
       gcp: 'https://projetor-inflacao-bnizxb6syq-rj.a.run.app'
     };
-    const PROVIDER_NAMES = { aws: 'AWS', azure: 'Azure', gcp: 'GCP' };
+    
+    const PROVIDER_NAMES = { vercel: 'Vercel', azure: 'Azure', gcp: 'GCP' };
     const ESTIMATED_INFLATION_RATE = 0.045;
     const REQUEST_TIMEOUT_MS = 8000;
     let chartData = { months: [], invested: [], total: [] };
@@ -896,7 +890,6 @@
       let balance = initial;
       const points = [{ m: 0, invested: initial, total: initial }];
       for (let m = 1; m <= months; m++) {
-        // Supõe que o aporte mensal ocorre no fim de cada mês.
         balance = balance * (1 + monthlyRate) + monthly;
         if (m === 1 || m === months || m % Math.max(1, Math.ceil(months / 60)) === 0) {
           points.push({ m, invested: initial + monthly * m, total: balance });
@@ -906,7 +899,6 @@
       const profit = balance - invested;
       const inflationFactor = Math.pow(1 + inflation, months / 12);
       const real = balance / inflationFactor;
-      // Câmbio fixo usado na conversão.
       const usdRate = 5.50, eurRate = 6.00;
       return { initial, monthly, annualRate, inflation, months, balance, invested, profit, real, usd: balance / usdRate, eur: balance / eurRate, usdRate, eurRate, points };
     }
@@ -952,9 +944,12 @@
 
     function setModuleState(name, state, message, latency) {
       const status = $(`${name}Status`);
-      status.dataset.state = state;
-      status.textContent = message;
-      $(`${name}Latency`).textContent = latency;
+      if (status) {
+        status.dataset.state = state;
+        status.textContent = message;
+      }
+      const latElem = $(`${name}Latency`);
+      if (latElem) latElem.textContent = latency;
     }
 
     function requireNumber(data, key) {
@@ -965,7 +960,7 @@
     }
 
     function normalizeResponse(name, data) {
-      if (name === 'aws') {
+      if (name === 'vercel') {
         return {
           balance: requireNumber(data, 'balance'),
           invested: requireNumber(data, 'invested'),
@@ -1005,9 +1000,9 @@
       }
     }
 
-    function renderAws(data) {
-      $('awsValue').textContent = money(data.balance);
-      $('awsDetail').textContent = `${money(data.invested)} investidos · ${money(data.profit)} em rendimentos`;
+    function renderVercel(data) {
+      $('vercelValue').textContent = money(data.balance);
+      $('vercelDetail').textContent = `${money(data.invested)} investidos · ${money(data.profit)} em rendimentos`;
     }
 
     function renderAzure(data) {
@@ -1056,20 +1051,21 @@
       submitButton.classList.add('loading');
       try {
         const d = getProjection();
-        renderAws(d);
-        /*renderAzure(d);*/
+        renderVercel(d);
         renderGcp({ real: d.real }, d.balance, d.inflation);
         $('monthsLabel').textContent = d.months % 12 === 0 ? `${d.months / 12} ${d.months / 12 === 1 ? 'ano' : 'anos'}` : `${d.months} meses`;
-        $('chartTerm').textContent = `${d.months} meses`; $('chartRate').textContent = `${fmt(d.annualRate * 100, 1)}%`;
+        $('chartTerm').textContent = `${d.months} meses`; 
+        $('chartRate').textContent = `${fmt(d.annualRate * 100, 1)}%`;
         chartData = { months: d.points.map(p => p.m), invested: d.points.map(p => p.invested), total: d.points.map(p => p.total) };
         drawChart(d.points);
+        
         await Promise.all([
-          processModule('aws', {
+          processModule('vercel', {
             initial: d.initial,
             monthly: d.monthly,
             annualRate: d.annualRate,
             months: d.months
-          }, { balance: d.balance, invested: d.invested, profit: d.profit }, renderAws),
+          }, { balance: d.balance, invested: d.invested, profit: d.profit }, renderVercel),
           processModule('azure', {
             valorReais: d.balance,
             cotacaoDolar: d.usdRate,
