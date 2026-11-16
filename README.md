@@ -24,16 +24,31 @@ Uma SPA que simula juros compostos, converte o resultado para dólar e euro e co
 
 ## 📑 Sumário
 
+- [Integrantes](#-integrantes)
 - [Visão geral](#-visão-geral)
 - [Arquitetura](#️-arquitetura)
 - [Estrutura do repositório](#-estrutura-do-repositório)
 - [Endpoints em produção](#-endpoints-em-produção)
 - [Contratos HTTP](#-contratos-http)
 - [Resiliência e fallback](#️-resiliência-e-fallback)
+- [Teste de resiliência](#-teste-de-resiliência)
 - [Como executar localmente](#-como-executar-localmente)
 - [Deploy](#-deploy)
 - [Testando com cURL](#-testando-com-curl)
 - [Solução de problemas](#-solução-de-problemas)
+- [Documentação técnica](#-documentação-técnica)
+
+---
+
+## 👥 Integrantes
+
+**Grupo A — SaaS Financeiro (Análise e Projeção de Investimentos)**
+
+- Pedro H. Cavenaghi
+- Samuel Santos
+- João Pedro
+- João Luis
+- Felipe
 
 ---
 
@@ -85,10 +100,11 @@ Saasmulticloud/
 ├── frontend-app/
 │   ├── index.html                  # SPA: interface, gráfico, chamadas HTTP e fallback
 │   └── package.json                # Script de start para o Railway (serve)
-├── vercel.json                     # Configuração do projeto Vercel
 ├── Atividade 04 - Ecossistema SaaS Multicloud Integrado.pdf   # Enunciado da atividade
 └── Documentacao_Tecnica_IHMInvest_Multicloud.docx            # Documentação técnica
 ```
+
+> ℹ️ **Por que `api/` e não `aws-lambda/`?** O enunciado prevê a pasta `/aws-lambda`, mas a função de juros compostos foi migrada da AWS Lambda para a **Vercel Functions**, que exige que as funções fiquem em `api/`. O contrato JSON da função foi mantido.
 
 ---
 
@@ -193,6 +209,24 @@ Calcula o valor real: `balance / (1 + inflation)^(months / 12)`.
 
 ---
 
+## 🧯 Teste de resiliência
+
+Roteiro para demonstrar o fallback ao vivo, direto pela URL pública:
+
+1. Abra o [dashboard](https://ihminvest-production-dashboard.up.railway.app) e clique em **Calcular projeção**. Os três cards devem mostrar **"Processado por Vercel / Azure / GCP"** e a latência em ms.
+2. Abra o DevTools (`F12`) → aba **Network** → clique com o botão direito na requisição de um provedor (por exemplo, `conversorInternacional`) → **Block request URL**.
+3. Clique novamente em **Calcular projeção**. Somente o card bloqueado exibe **"Serviço temporariamente indisponível · fallback local"** com o valor calculado no navegador; os outros dois continuam processados pelas nuvens.
+4. Remova o bloqueio (aba **Network request blocking**) e calcule de novo: o card volta a ser processado pelo provedor.
+
+| Cenário | Resultado esperado |
+|---|---|
+| Endpoint bloqueado / fora do ar | Aviso e fallback local apenas no card afetado |
+| Resposta acima de 8 s | Requisição abortada (`AbortController`) e fallback no card |
+| Resposta sem os campos esperados | Tratada como falha e fallback no card |
+| Todos os provedores fora do ar | Os três cards em fallback; gráfico e interface continuam funcionando |
+
+---
+
 ## 💻 Como executar localmente
 
 ### Frontend
@@ -269,6 +303,20 @@ curl -X POST https://saasmulticloud-juros-functions.vercel.app/api/juros \
 | Erro de **CORS** no console | O preflight `OPTIONS` não respondeu 2xx (função sem tratamento de `OPTIONS`) **ou** a URL não existe (`404 DEPLOYMENT_NOT_FOUND`) | Teste o endpoint com cURL; confira a URL em `API_ENDPOINTS` e se a versão publicada trata `OPTIONS` |
 | Card mostra "fallback local" | Timeout, erro de rede ou resposta fora do contrato | Veja a mensagem em `console.error` e teste o endpoint isoladamente |
 | `HTTP 400` | Campo ausente ou fora dos limites | Confira o contrato do provedor acima |
+
+---
+
+## 📘 Documentação técnica
+
+O relatório completo está em [`Documentacao_Tecnica_IHMInvest_Multicloud.docx`](./Documentacao_Tecnica_IHMInvest_Multicloud.docx). Ele traz diagrama da arquitetura, especificação dos endpoints, análise de latência *cold start* × *warm start*, relato comparativo dos consoles (IAM, CORS, logs e deploy), evidências de implantação, estimativa de custos (FinOps) e roteiro de desativação dos recursos.
+
+Resumo das medições de latência (16/11/2026, cURL a partir do Brasil):
+
+| Provedor | 1ª requisição (*cold*) | *Warm* (mediana) |
+|---|---|---|
+| Vercel | 795 ms | 247 ms |
+| Azure | 2.070 ms | 654 ms |
+| Google Cloud | 229 ms | 161 ms |
 
 ---
 
