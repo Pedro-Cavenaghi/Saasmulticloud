@@ -7,7 +7,7 @@ app.http('conversorInternacional', {
     handler: async (request, context) => {
         context.log('Iniciando conversão de moedas.');
 
-        // 1. Ler o JSON recebido
+
         let dados;
 
         try {
@@ -19,7 +19,7 @@ app.http('conversorInternacional', {
             };
         }
 
-        // 2. Validar o valor em reais
+
         if (
             !dados ||
             !Number.isFinite(dados.valorReais) ||
@@ -35,11 +35,11 @@ app.http('conversorInternacional', {
 
         const valorReais = dados.valorReais;
 
-        // Cotações demonstrativas, não consultadas no mercado
+
         const cotacaoDolar = dados.cotacaoDolar ?? 5.0;
         const cotacaoEuro = dados.cotacaoEuro ?? 6.25;
 
-        // 3. Validar as cotações
+
         if (
             !Number.isFinite(cotacaoDolar) ||
             cotacaoDolar <= 0 ||
@@ -55,7 +55,7 @@ app.http('conversorInternacional', {
         }
 
         try {
-            // 4. Calcular
+
             const valorDolar = valorReais / cotacaoDolar;
             const valorEuro = valorReais / cotacaoEuro;
 
@@ -71,7 +71,7 @@ app.http('conversorInternacional', {
                 };
             }
 
-            // 5. Retornar os resultados em JSON
+
             return {
                 status: 200,
                 jsonBody: {
